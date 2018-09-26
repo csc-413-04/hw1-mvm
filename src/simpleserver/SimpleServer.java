@@ -1,5 +1,9 @@
 package simpleserver;
 
+import com.google.gson.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -7,12 +11,44 @@ import java.net.Socket;
 class SimpleServer {
 
   public static void main(String[] args) throws IOException {
+    Gson gson = new Gson();
+    BufferedReader br;
+    try {
+      br = new BufferedReader(new FileReader("src/simpleserver/data.json"));
+      System.out.println("works for reading");
+      //parsing is reading data here
+      JsonParser jsonParser = new JsonParser();
+      JsonObject obj = jsonParser.parse(br).getAsJsonObject();
+      //getting users from the file and saving them into an array
+      User[] users = gson.fromJson(obj.get("users"), User[].class);
+      User.loadAll();
+      //getting posts from the file and saving them into an array
+      Posts[] posts = gson.fromJson(obj.get("posts"), Posts[].class);
+      Posts.loadAll();
+      //System.out.println(obj.get("users"));
+
+      Response response = new Response();
+      response.setUsers(users);
+      response.setPosts(posts);
+//      String jsonString1 = gson.toJson(User.getUser(0));
+//      String jsonString2 = gson.toJson(Posts.getPost(0));
+//      String jsonString3 = gson.toJson(User.getUser(2));
+//      String jsonString4 = gson.toJson(Posts.getPost(3));
+//
+//      System.out.println(jsonString1);
+//      System.out.println(jsonString2);
+//      System.out.println(jsonString3);
+//      System.out.println(jsonString4);
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    }
     ServerSocket ding;
     Socket dong = null;
     String resource = null;
+
     try {
-      ding = new ServerSocket(1299);
-      System.out.println("Opened socket " + 1299);
+      ding = new ServerSocket(1301);
+      System.out.println("Opened socket " + 1301);
       while (true) {
 
         // keeps listening for new clients, one at a time
@@ -59,7 +95,7 @@ class SimpleServer {
         writer.println("");
 
         // Body of our response
-        writer.println("<h1>Some cool response!</h1>");
+        writer.println("<h1>Some dumb response!</h1>");
 
         dong.close();
       }
