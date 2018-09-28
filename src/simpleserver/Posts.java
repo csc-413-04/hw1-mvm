@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Posts {
+public class Posts implements  Data{
     // Use Java generics to avoid linear searching for users by id, makes it O(1) instead of O(n)
     private  static Map<Integer, Posts> postidDict = new HashMap<>();
     private static ArrayList<Posts> allPosts = new ArrayList<>();

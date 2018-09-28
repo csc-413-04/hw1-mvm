@@ -7,6 +7,8 @@ import java.io.FileReader;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 class SimpleServer {
 
@@ -28,8 +30,7 @@ class SimpleServer {
       //System.out.println(obj.get("users"));
 
       Response response = new Response();
-      response.setUsers(users);
-      response.setPosts(posts);
+
 //      String jsonString1 = gson.toJson(User.getUser(0));
 //      String jsonString2 = gson.toJson(Posts.getPost(0));
 //      String jsonString3 = gson.toJson(User.getUser(2));
@@ -67,6 +68,12 @@ class SimpleServer {
           String line = in.readLine();
           System.out.println("----------REQUEST START---------");
           System.out.println(line);
+          //create an array to store the whole request into sections using space as a delimiter
+          String[] lineArray = line.split(" ");
+          //save the second section into string -- the url
+          String requestUrl = lineArray[1];
+
+          //java URL
           // read only headers
           line = in.readLine();
           while (line != null && line.trim().length() > 0) {
@@ -95,7 +102,7 @@ class SimpleServer {
         writer.println("");
 
         // Body of our response
-        writer.println("<h1>Some dumb response!</h1>");
+        writer.println("<h1>Some response!</h1>");
 
         dong.close();
       }

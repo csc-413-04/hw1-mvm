@@ -22,14 +22,12 @@ package simpleserver;
 
 
 class Response {
-    User[] users;
-    Posts[] posts;
+    Data [] data;
 
-    public void setUsers(User[] users) {
-        this.users = users;
-    }
+    String status;
+    int entries;
 
-    public void setPosts(Posts[] posts) {
-        this.posts = posts;
+    public void setData(Data[] data) {
+        this.data = data;
     }
 }
