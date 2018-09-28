@@ -19,8 +19,6 @@ package simpleserver;
 //    iData[] data;
 //}
 
-
-
 class Response {
     Data [] data;
 

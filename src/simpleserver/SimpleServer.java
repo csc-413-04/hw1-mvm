@@ -5,12 +5,37 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.*;
+import java.net.*;
+import java.net.MalformedURLException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class SimpleServer {
+
+  public static String getUrl(String urls){
+      StringBuilder url = new StringBuilder();
+      try {
+      URL url1 = new URL(urls);
+      URLConnection urlConnect = url1.openConnection();
+      BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnect.getInputStream()));
+      String line1;
+      // read from the urlconnect via the bufferedreader
+      while ((line1 = bufferedReader.readLine()) != null) {
+        url.append(line1 + "\n");
+      }
+      bufferedReader.close();
+    } catch (MalformedURLException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    System.out.println(url);
+    return url.toString();
+  }
 
   public static void main(String[] args) throws IOException {
     Gson gson = new Gson();
@@ -74,6 +99,10 @@ class SimpleServer {
           String requestUrl = lineArray[1];
 
           //java URL
+          //String uRL  = getUrlContents("http://127.0.0.1:1301/");
+          String uRL  = getUrl(requestUrl);
+          System.out.println(uRL);
+
           // read only headers
           line = in.readLine();
           while (line != null && line.trim().length() > 0) {
