@@ -15,27 +15,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class SimpleServer {
-
-  public static String getUrl(String urls){
-      StringBuilder url = new StringBuilder();
-      try {
-      URL url1 = new URL(urls);
-      URLConnection urlConnect = url1.openConnection();
-      BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnect.getInputStream()));
-      String line1;
-      // read from the urlconnect via the bufferedreader
-      while ((line1 = bufferedReader.readLine()) != null) {
-        url.append(line1 + "\n");
-      }
-      bufferedReader.close();
-    } catch (MalformedURLException e) {
-      e.printStackTrace();
-    } catch (IOException e) {
-      e.printStackTrace();
+    public static void splitRequest (String host) {
+        String r_endpoint;
+        String [] r_param = {null, null};
+        System.out.println("\t\t\t\tREQUEST HOST: "+ host);
+        //r_endpoint = host.substring(1,host.indexOf('?'));
+        //System.out.println("\t\t\t\tENDPOINTTT: " + r_endpoint);
     }
-    System.out.println(url);
-    return url.toString();
-  }
 
   public static void main(String[] args) throws IOException {
     Gson gson = new Gson();
@@ -98,12 +84,12 @@ class SimpleServer {
           //save the second section into string -- the url
           String requestUrl = lineArray[1];
 
-          //java URL
-          //String uRL  = getUrlContents("http://127.0.0.1:1301/");
-          String uRL  = getUrl(requestUrl);
-          System.out.println(uRL);
+          //System.out.println("The URL part: " +requestUrl);
+            splitRequest(requestUrl);
 
-          // read only headers
+
+
+            // read only headers
           line = in.readLine();
           while (line != null && line.trim().length() > 0) {
             int index = line.indexOf(": ");
