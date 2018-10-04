@@ -76,19 +76,46 @@ class SimpleServer {
           //System.out.println("\t\t\tRQT URL:  " +requestUrl);
 
           //create URL object
-          URL myURL = new URL ("http://localhost:8080/posts?postid=7&maxlength=12");
-
+          //URL myURL = new URL ("http://localhost:8080/posts?postid=7&maxlength=12");
+          //URL myURL = new URL ("http://localhost:8080/posts?postid=7");
+          //URL myURL = new URL ("http://localhost:8080/posts");
+          //URL myURL = new URL ("http://localhost:8080/user?user=7");
+          URL myURL = new URL ("http://localhost:8080/user");
           //URL myURL = new URL (requestUrl);
 
           String endpoint = myURL.getPath();
-          String param[] = myURL.getQuery().split("&");
+          String parameter = myURL.getQuery();
 
           // Testing print the endpoint
           System.out.println("\t\t\tENDPOINT: " + endpoint);
 
-          // Testing print parameters
-          System.out.println("\t\t\tPARAM1: " + param[0]);
-          System.out.println("\t\t\tPARAM2: " + param[1]);
+          //System.out.println("\t\t\tPAMR: " + parameter.isEmpty());
+
+          switch(endpoint){
+            case "/posts":
+              if (parameter == null) {
+                System.out.println("\t\t\tERROR! Need parameters!");
+              } else {
+                String param[] = myURL.getQuery().split("&");
+                if(param.length == 1){
+                  System.out.println("\t\t\tPARAM: " + param[0]);
+                }else if (param.length == 2) {
+                  // Testing print parameters
+                  System.out.println("\t\t\tPARAM1: " + param[0]);
+                  System.out.println("\t\t\tPARAM2: " + param[1]);
+                }
+              }
+              break;
+            case "/user":
+              if(parameter == null){
+                //System.out.println("Return all users");
+              }else{
+                //Return user obj by ID
+              }
+              break;
+            default:
+              System.out.println("\tError");
+          }
 
           // read only headers
           line = in.readLine();
