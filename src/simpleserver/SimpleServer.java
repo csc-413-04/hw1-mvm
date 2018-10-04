@@ -69,11 +69,8 @@ class SimpleServer {
           System.out.println("----------REQUEST START---------");
           System.out.println(line);
 
-          //create an array to store the whole request into sections using space as a delimiter
+
           String[] lineArray = line.split(" ");
-          //save the second section into string -- the url
-          //String requestUrl = "http:/" +lineArray[1];
-          //System.out.println("\t\t\tRQT URL:  " +requestUrl);
 
           //create URL object
           //URL myURL = new URL ("http://localhost:8080/posts?postid=7&maxlength=12");
@@ -149,7 +146,10 @@ class SimpleServer {
         writer.println("<h1>  Status: </h1>");
         writer.println("<h1>  Entries: </h1>");
         writer.println("<h1>  Data: [ </h1>");
-        writer.println("<h1>} </h1>");
+        writer.println("<h1>} postid: </h1>");
+        writer.println("<h1>} userid: </h1>");
+        writer.println("<h1>} data </h1>");
+
 
         dong.close();
       }
