@@ -2,7 +2,7 @@ package simpleserver;
 
 import javax.annotation.processing.Processor;
 
-public interface Data {
+public class ProcessorFactory {
     public static Processor makeProcessor(String request, String[] args){
         switch(request) {
             case "/users":
