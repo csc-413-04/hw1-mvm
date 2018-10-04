@@ -1,14 +1,14 @@
 package simpleserver;
 
 import com.google.gson.*;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.net.URL;
 
 class SimpleServer {
 
@@ -17,7 +17,7 @@ class SimpleServer {
     BufferedReader br;
     try {
       br = new BufferedReader(new FileReader("src/simpleserver/data.json"));
-      System.out.println("works for reading");
+      //System.out.println("works for reading");
       //parsing is reading data here
       JsonParser jsonParser = new JsonParser();
       JsonObject obj = jsonParser.parse(br).getAsJsonObject();
@@ -28,9 +28,8 @@ class SimpleServer {
       Posts[] posts = gson.fromJson(obj.get("posts"), Posts[].class);
       Posts.loadAll();
       //System.out.println(obj.get("users"));
-
       Response response = new Response();
-
+//
 //      String jsonString1 = gson.toJson(User.getUser(0));
 //      String jsonString2 = gson.toJson(Posts.getPost(0));
 //      String jsonString3 = gson.toJson(User.getUser(2));
@@ -48,8 +47,9 @@ class SimpleServer {
     String resource = null;
 
     try {
-      ding = new ServerSocket(1301);
-      System.out.println("Opened socket " + 1301);
+      //  http://localhost:8080
+      ding = new ServerSocket(8080);
+      System.out.println("Opened socket " + 8080);
       while (true) {
 
         // keeps listening for new clients, one at a time
@@ -68,12 +68,28 @@ class SimpleServer {
           String line = in.readLine();
           System.out.println("----------REQUEST START---------");
           System.out.println(line);
+
           //create an array to store the whole request into sections using space as a delimiter
           String[] lineArray = line.split(" ");
           //save the second section into string -- the url
-          String requestUrl = lineArray[1];
+          //String requestUrl = "http:/" +lineArray[1];
+          //System.out.println("\t\t\tRQT URL:  " +requestUrl);
 
-          //java URL
+          //create URL object
+          URL myURL = new URL ("http://localhost:8080/posts?postid=7&maxlength=12");
+
+          //URL myURL = new URL (requestUrl);
+
+          String endpoint = myURL.getPath();
+          String param[] = myURL.getQuery().split("&");
+
+          // Testing print the endpoint
+          System.out.println("\t\t\tENDPOINT: " + endpoint);
+
+          // Testing print parameters
+          System.out.println("\t\t\tPARAM1: " + param[0]);
+          System.out.println("\t\t\tPARAM2: " + param[1]);
+
           // read only headers
           line = in.readLine();
           while (line != null && line.trim().length() > 0) {
@@ -102,7 +118,11 @@ class SimpleServer {
         writer.println("");
 
         // Body of our response
-        writer.println("<h1>Some response!</h1>");
+        writer.println("<h1>{ </h1>");
+        writer.println("<h1>  Status: </h1>");
+        writer.println("<h1>  Entries: </h1>");
+        writer.println("<h1>  Data: [ </h1>");
+        writer.println("<h1>} </h1>");
 
         dong.close();
       }
