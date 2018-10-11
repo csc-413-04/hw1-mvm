@@ -3,6 +3,7 @@ package simpleserver;
 import com.google.gson.Gson;
 
 public class PostProcessor implements ServerProcessor {
+    String response;
     public PostProcessor(String[] args) {
 
     }
@@ -37,6 +38,6 @@ public class PostProcessor implements ServerProcessor {
 
             }
         }
-        return null;
+        return response;
     }
 }
