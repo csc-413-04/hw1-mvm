@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 
 public class PostProcessor implements ServerProcessor {
     String response;
-    public PostProcessor(String[] args) {
+    public PostProcessor() {
 
     }
     @Override

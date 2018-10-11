@@ -27,12 +27,12 @@ class SimpleServer {
             //System.out.println(obj.get("users"));
             Response response = new Response();
 
-      String jsonString1 = gson.toJson(User.getUser(0));
+//      String jsonString1 = gson.toJson(User.getUser(0));
 //      String jsonString2 = gson.toJson(Posts.getPost(0));
 //      String jsonString3 = gson.toJson(User.getUser(2));
 //      String jsonString4 = gson.toJson(Posts.getPost(3));
 //
-      System.out.println(jsonString1);
+//      System.out.println(jsonString1);
 //      System.out.println(jsonString2);
 //      System.out.println(jsonString3);
 //      System.out.println(jsonString4);

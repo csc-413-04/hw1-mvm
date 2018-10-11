@@ -1,21 +1,30 @@
 package simpleserver;
 
-public interface Data {
-//    User[] users = null;
-//    HashMap<String, User> userMap = new HashMap<>();
-//    public void setUserid(int userid);
-//
-//    boolean isLoaded = false;
-//
-//    public static Data getAllUsers(){
-//        return null;
-//    }
-//
-//   // public User[] getAllUsers();
-//    void connect();
+import java.util.HashMap;
 
-    //void setUserid(int userid);
+public class Data  {
+    User[] users = null;
+    Posts[] posts = null;
+    private  HashMap <String, User> userMap = new HashMap<>();
+    private  HashMap <String, Posts> postMap = new HashMap<>();
 
-    //void setData(String data);
+    boolean isLoaded = false;
+    public static Data data = new Data();
+
+    public Data () {
 
     }
+
+    public static Data getData() {
+        return data;
+    }
+
+    public User[] getAllUsers() {
+        return this.users;
+    }
+
+    public Posts[] getAllPosts() {
+        return this.posts;
+    }
+
+}

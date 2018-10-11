@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class User implements  Data{
+public class User extends Data{
     // Use Java generics to avoid linear searching for users by id, makes it O(1) instead of O(n)
     private  static Map<Integer, User> useridDict = new HashMap<>();
     private static ArrayList<User> allUsers = new ArrayList<>();

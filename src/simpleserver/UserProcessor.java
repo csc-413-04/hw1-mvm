@@ -3,7 +3,7 @@ package simpleserver;
 import com.google.gson.Gson;
 
 public class UserProcessor implements ServerProcessor{
-    public UserProcessor(String[] args) {
+    public UserProcessor() {
 
     }
 
@@ -21,9 +21,9 @@ public class UserProcessor implements ServerProcessor{
         String[] parameters = request[1].split("&");
         if(parameters == null){
             System.out.println("\t\t\tReturn all users");
-//          for (int i = 0; i <= 50; i++) {
-//              System.out.println(gson.toJson(User.getUser(i)));
-//          }
+          for (int i = 0; i <= 50; i++) {
+              System.out.println(gson.toJson(User.getUser(i)));
+          }
         } else if (parameters.length == 2) {
             System.out.println("\t\t\tNot valid parameter!");
         } else {
