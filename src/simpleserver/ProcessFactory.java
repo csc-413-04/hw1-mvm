@@ -12,7 +12,7 @@ public class ProcessFactory {
         //System.out.println("ENDPOINT: "+endpoint + "\n" + parameters[0] + "\n" + parameters[1]);
 
 
-        //ServerProcessor processor = null;
+        ServerProcessor processor = null;
 
 
         switch(endpoint) {
@@ -22,9 +22,9 @@ public class ProcessFactory {
                 return new PostProcessor(parameters);
         }
 
-//        processor = new UserProcessor(parameters);
-//
-//        return processor;
-        return null;
+       //processor = new UserProcessor(parameters);
+
+       return processor;
+       //return null;
     }
 }

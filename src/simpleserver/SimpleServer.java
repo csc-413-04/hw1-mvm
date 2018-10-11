@@ -3,6 +3,7 @@ package simpleserver;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import com.google.gson.Gson;
 
 class SimpleServer {
 
@@ -11,6 +12,7 @@ class SimpleServer {
         Socket dong = null;
         String mainLine = null;
         String resource = null;
+        Response response = new Response();
         try {
             ding = new ServerSocket(8080);
             System.out.println("Opened socket " + 8080);
@@ -68,6 +70,9 @@ class SimpleServer {
                 //System.out.println("ENNNNSSPONTKDHFKUDHFEUKJF: "+endpoint);
                 ServerProcessor serverProcessor = ProcessFactory.getProcessor(endpoint);
                 writer.println(serverProcessor.process(endpoint));
+
+                Gson gson = new Gson();
+                writer.println(gson.toJson(response));
 
                 dong.close();
             }
