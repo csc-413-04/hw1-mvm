@@ -11,19 +11,26 @@ public class UserProcessor implements ServerProcessor{
     public String process(String url) {
         Response response = new Response();
         //Data da = Data.getData();
-        //response.setData(da.get);
-        response.setStatus("OK");
+        //response.setPost(Posts.getPost(da));
+        //response.setStatus("OK");
         Gson gson = new Gson();
 
-
         String[] request = url.split("\\?");
+        System.out.println("HELLFIOHFWJHIUFKJEGIEKJ: " + url);
         String endpoint = request[0];
+        System.out.println(request[0] + "Param: " + request[1]);
         String[] parameters = request[1].split("&");
+        //String[] parameters = request[1].split("&");
+
+
         if(parameters == null){
             System.out.println("\t\t\tReturn all users");
-          for (int i = 0; i <= 50; i++) {
-              System.out.println(gson.toJson(User.getUser(i)));
-          }
+            response.setStatus("OK");
+            //response.setData();
+            //response.setData();
+//          for (int i = 0; i <= 50; i++) {
+//              System.out.println(gson.toJson(User.getUser(i)));
+//          }
         } else if (parameters.length == 2) {
             System.out.println("\t\t\tNot valid parameter!");
         } else {
