@@ -20,7 +20,7 @@ public class Data {
     public Data(){
 //        this.getAllUsers();
 //        this.getAllPosts();
-        connect();
+//        connect();
     }
 
     public static Data getData(){

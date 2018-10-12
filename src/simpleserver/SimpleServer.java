@@ -11,21 +11,21 @@ class SimpleServer {
 
     public static void main(String[] args) throws IOException {
         Gson gson = new Gson();
-        BufferedReader br;
-        try{
-            br = new BufferedReader(new FileReader("src/simpleserver/data.json"));
-            //System.out.println("works for reading");
-            //parsing is reading data here
-            JsonParser jsonParser = new JsonParser();
-            JsonObject obj = jsonParser.parse(br).getAsJsonObject();
-            //getting users from the file and saving them into an array
-            User[] users = gson.fromJson(obj.get("users"), User[].class);
-            User.loadAll();
-            //getting posts from the file and saving them into an array
-            Posts[] posts = gson.fromJson(obj.get("posts"), Posts[].class);
-            Posts.loadAll();
-            //System.out.println(obj.get("users"));
-            Response response = new Response();
+//        BufferedReader br;
+//        try{
+//            br = new BufferedReader(new FileReader("src/simpleserver/data.json"));
+//            //System.out.println("works for reading");
+//            //parsing is reading data here
+//            JsonParser jsonParser = new JsonParser();
+//            JsonObject obj = jsonParser.parse(br).getAsJsonObject();
+//            //getting users from the file and saving them into an array
+//            User[] users = gson.fromJson(obj.get("users"), User[].class);
+//            User.loadAll();
+//            //getting posts from the file and saving them into an array
+//            Posts[] posts = gson.fromJson(obj.get("posts"), Posts[].class);
+//            Posts.loadAll();
+//            //System.out.println(obj.get("users"));
+//            Response response = new Response();
 
 //      String jsonString1 = gson.toJson(User.getUser(0));
 //      String jsonString2 = gson.toJson(Posts.getPost(0));
@@ -36,9 +36,10 @@ class SimpleServer {
 //      System.out.println(jsonString2);
 //      System.out.println(jsonString3);
 //      System.out.println(jsonString4);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
         ServerSocket ding;
         Socket dong = null;
         String mainLine = null;
@@ -94,16 +95,14 @@ class SimpleServer {
                 writer.println("");
 
                 // Body of our response
-                writer.println("<h1>Some cool response!</h1>");
+                //writer.println("<h1>Some cool response!</h1>");
 
                 String[] requestParts = mainLine.split(" "); // [GET , /hello, HTTP/1.1]
                 String endpoint = requestParts[1];
-                //System.out.println("ENNNNSSPONTKDHFKUDHFEUKJF: "+endpoint);
+                //System.out.println("ENDPOINT: "+endpoint);
                 ServerProcessor serverProcessor = ProcessFactory.getProcessor(endpoint);
                 //writer.println(serverProcessor.process(endpoint));
-
-                //Gson gson = new Gson();
-                writer.println(gson.toJson(response));
+                writer.println(gson.toJson(serverProcessor.process(endpoint)));
 
                 dong.close();
             }
